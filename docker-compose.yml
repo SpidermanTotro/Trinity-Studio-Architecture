@@ -1,0 +1,91 @@
+version: '3.8'
+
+services:
+  # Trinity Studio Application
+  trinity-studio:
+    build: .
+    container_name: trinity-studio
+    ports:
+      - "8085:8085"  # Main server
+      - "8086:8086"  # AI Debugger
+    environment:
+      - NODE_ENV=production
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_USER=trinity
+      - DB_PASSWORD=trinity
+      - DB_AUTH=trinity_auth
+      - DB_CHARACTERS=trinity_characters
+      - DB_WORLD=trinity_world
+      - JWT_SECRET=change-this-in-production
+    depends_on:
+      mysql:
+        condition: service_healthy
+    volumes:
+      - ./config:/app/config
+      - ./logs:/app/logs
+      - ./data:/app/data
+    restart: unless-stopped
+    networks:
+      - trinity-network
+
+  # MySQL Database
+  mysql:
+    image: mysql:8.0
+    container_name: trinity-mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpassword
+      - MYSQL_DATABASE=trinity_auth
+      - MYSQL_USER=trinity
+      - MYSQL_PASSWORD=trinity
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./scripts/database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "3306:3306"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-prootpassword"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - trinity-network
+
+  # Redis (optional, for caching)
+  redis:
+    image: redis:7-alpine
+    container_name: trinity-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    restart: unless-stopped
+    networks:
+      - trinity-network
+
+  # Nginx (optional, reverse proxy)
+  nginx:
+    image: nginx:alpine
+    container_name: trinity-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/ssl:/etc/nginx/ssl
+    depends_on:
+      - trinity-studio
+    restart: unless-stopped
+    networks:
+      - trinity-network
+
+volumes:
+  mysql-data:
+    driver: local
+  redis-data:
+    driver: local
+
+networks:
+  trinity-network:
+    driver: bridge
