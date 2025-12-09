@@ -183,6 +183,12 @@ class UserService {
     this.validator = validator;
   }
 
+  _sanitizeUser(user) {
+    // Remove password from user object
+    const { password, ...sanitizedUser } = user;
+    return sanitizedUser;
+  }
+
   async createUser(userData) {
     // Validate
     const { error } = this.validator.validateCreate(userData);
@@ -203,9 +209,7 @@ class UserService {
       password: hashedPassword,
     });
 
-    // Remove password from response
-    delete user.password;
-    return user;
+    return this._sanitizeUser(user);
   }
 
   async getAllUsers(options) {
@@ -216,8 +220,7 @@ class UserService {
     const user = await this.userRepo.findById(id);
     if (!user) throw new NotFoundError('User not found');
     
-    delete user.password;
-    return user;
+    return this._sanitizeUser(user);
   }
 
   async updateUser(id, updateData) {
@@ -227,8 +230,7 @@ class UserService {
     const user = await this.userRepo.update(id, updateData);
     if (!user) throw new NotFoundError('User not found');
     
-    delete user.password;
-    return user;
+    return this._sanitizeUser(user);
   }
 
   async deleteUser(id) {
@@ -250,8 +252,7 @@ class UserService {
       { expiresIn: '24h' }
     );
 
-    delete user.password;
-    return { user, token };
+    return { user: this._sanitizeUser(user), token };
   }
 }
 

@@ -129,9 +129,10 @@ class UserService {
   }
 
   async hashPassword(password) {
-    // Implementation of password hashing
-    // Using bcrypt or similar library
-    return hashedPassword;
+    // Implementation of password hashing using bcrypt
+    const bcrypt = require('bcrypt');
+    const saltRounds = 10;
+    return await bcrypt.hash(password, saltRounds);
   }
 }
 
@@ -146,6 +147,8 @@ class User {
   constructor(data) {
     this.id = data.id;
     this.email = data.email;
+    this.firstName = data.firstName;
+    this.lastName = data.lastName;
     this.name = data.name;
     this.role = data.role || 'user';
     this.createdAt = data.createdAt;
