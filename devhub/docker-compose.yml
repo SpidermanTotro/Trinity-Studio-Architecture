@@ -1,0 +1,122 @@
+# Trinity Studio DevHub - Docker Compose Configuration
+# SKELETON IMPLEMENTATION - MVP Version
+#
+# This docker-compose file brings up the core DevHub services for local development.
+# 
+# Security Notes:
+# - DO NOT commit real secrets or API keys
+# - Use .env file or GitHub Secrets for production
+# - Change all default passwords before deploying
+# - Use proper volume mounts for data persistence in production
+
+version: '3.8'
+
+services:
+  # PostgreSQL database for storing tasks, patches, and metadata
+  postgres:
+    image: postgres:15-alpine
+    container_name: trinity-postgres
+    environment:
+      POSTGRES_DB: trinity_devhub
+      POSTGRES_USER: trinity_user
+      # WARNING: Change this password! Use secrets in production!
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-trinity_dev_password_CHANGE_ME}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U trinity_user -d trinity_devhub"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - trinity-network
+
+  # Redis for caching, task queues, and session storage
+  redis:
+    image: redis:7-alpine
+    container_name: trinity-redis
+    command: redis-server --appendonly yes
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - trinity-network
+
+  # DevHub API service (Node.js + TypeScript)
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: trinity-api
+    environment:
+      NODE_ENV: development
+      PORT: 3000
+      DATABASE_URL: postgresql://trinity_user:${POSTGRES_PASSWORD:-trinity_dev_password_CHANGE_ME}@postgres:5432/trinity_devhub
+      REDIS_URL: redis://redis:6379
+      # PLACEHOLDER: GitHub App credentials (use GitHub Secrets in production)
+      GITHUB_APP_ID: ${GITHUB_APP_ID:-PLACEHOLDER}
+      GITHUB_APP_PRIVATE_KEY_PATH: ${GITHUB_APP_PRIVATE_KEY_PATH:-/secrets/github-app-key.pem}
+      GITHUB_APP_INSTALLATION_ID: ${GITHUB_APP_INSTALLATION_ID:-PLACEHOLDER}
+      # AI Helper service URL
+      AI_HELPER_URL: http://ai-helper:3001
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./api:/app
+      - /app/node_modules
+      # Mount secrets directory (DO NOT commit actual secrets!)
+      - ${SECRETS_DIR:-./secrets}:/secrets:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - trinity-network
+    command: npm run dev
+
+  # AI Helper service (TypeScript)
+  ai-helper:
+    build:
+      context: ./ai-helper
+      dockerfile: Dockerfile
+    container_name: trinity-ai-helper
+    environment:
+      NODE_ENV: development
+      PORT: 3001
+      # PLACEHOLDER: OpenAI/Anthropic API keys (use secrets in production!)
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-sk-PLACEHOLDER_DO_NOT_COMMIT_REAL_KEY}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-sk-ant-PLACEHOLDER_DO_NOT_COMMIT_REAL_KEY}
+      # Rate limiting settings
+      RATE_LIMIT_MAX_REQUESTS: ${RATE_LIMIT_MAX_REQUESTS:-100}
+      RATE_LIMIT_WINDOW_MS: ${RATE_LIMIT_WINDOW_MS:-900000}
+      # PII redaction enabled
+      ENABLE_PII_REDACTION: ${ENABLE_PII_REDACTION:-true}
+      # Provenance logging
+      PROVENANCE_LOG_PATH: /app/logs/provenance.jsonl
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./ai-helper:/app
+      - /app/node_modules
+      - ai-helper-logs:/app/logs
+    networks:
+      - trinity-network
+    command: npm run dev
+
+networks:
+  trinity-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
+  redis-data:
+  ai-helper-logs:

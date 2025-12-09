@@ -1,0 +1,43 @@
+{
+  "name": "trinity-studio-architecture",
+  "version": "0.1.0",
+  "description": "Trinity Studio Architecture - MVP Skeleton",
+  "private": true,
+  "workspaces": [
+    "devhub/api",
+    "devhub/ai-helper",
+    "devstudio"
+  ],
+  "scripts": {
+    "install:all": "npm install && npm install --workspace=devhub/api && npm install --workspace=devhub/ai-helper && npm install --workspace=devstudio",
+    "dev": "npm run dev --workspace=devstudio",
+    "dev:api": "npm run dev --workspace=devhub/api",
+    "dev:ai-helper": "npm run dev --workspace=devhub/ai-helper",
+    "dev:studio": "npm run dev --workspace=devstudio",
+    "build": "npm run build --workspace=devhub/api && npm run build --workspace=devhub/ai-helper",
+    "build:api": "npm run build --workspace=devhub/api",
+    "build:ai-helper": "npm run build --workspace=devhub/ai-helper",
+    "start:api": "npm run start --workspace=devhub/api",
+    "start:ai-helper": "npm run start --workspace=devhub/ai-helper",
+    "docker:up": "cd devhub && docker-compose up -d",
+    "docker:down": "cd devhub && docker-compose down",
+    "docker:logs": "cd devhub && docker-compose logs -f",
+    "test": "npm run test --workspace=devhub/api && npm run test --workspace=devhub/ai-helper"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SpidermanTotro/Trinity-Studio-Architecture.git"
+  },
+  "keywords": [
+    "trinity-studio",
+    "devhub",
+    "wow",
+    "trinitycore",
+    "automation"
+  ],
+  "author": "Trinity Studio Team",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
