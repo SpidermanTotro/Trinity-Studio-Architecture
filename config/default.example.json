@@ -1,0 +1,100 @@
+{
+  "server": {
+    "port": 8085,
+    "host": "0.0.0.0",
+    "mode": "online",
+    "maxConnections": 1000,
+    "timeout": 30000
+  },
+  "database": {
+    "host": "localhost",
+    "port": 3306,
+    "user": "trinity",
+    "password": "trinity",
+    "auth": "trinity_auth",
+    "characters": "trinity_characters",
+    "world": "trinity_world",
+    "connectionLimit": 10,
+    "waitForConnections": true,
+    "queueLimit": 0
+  },
+  "features": {
+    "aiDebugger": true,
+    "liveReload": true,
+    "levelScaling": true,
+    "customQuests": true,
+    "dataExtraction": true,
+    "offlineSync": true
+  },
+  "expansions": {
+    "vanilla": true,
+    "tbc": true,
+    "wotlk": true,
+    "cataclysm": false,
+    "mop": false,
+    "wod": false,
+    "legion": false,
+    "bfa": false,
+    "shadowlands": false,
+    "dragonflight": false
+  },
+  "aiDebugger": {
+    "enabled": true,
+    "dashboardPort": 8086,
+    "logLevel": "info",
+    "metricsInterval": 5000,
+    "enableNpcTracking": true,
+    "enableQuestValidation": true,
+    "enableScriptAnalysis": true
+  },
+  "liveReload": {
+    "enabled": true,
+    "watchDirectories": [
+      "src/expansions",
+      "src/scripts"
+    ],
+    "debounceMs": 1000
+  },
+  "dataExtraction": {
+    "retailClientPath": "",
+    "outputDirectory": "data/extracted",
+    "enableAutoImport": false,
+    "transformers": {
+      "zones": true,
+      "npcs": true,
+      "quests": true,
+      "items": true,
+      "spells": true
+    }
+  },
+  "sync": {
+    "enabled": true,
+    "mode": "auto",
+    "interval": 300000,
+    "validateIntegrity": true,
+    "encryptTransfers": true
+  },
+  "security": {
+    "jwtSecret": "CHANGE_THIS_SECRET_KEY",
+    "bcryptRounds": 10,
+    "maxLoginAttempts": 5,
+    "rateLimit": {
+      "windowMs": 900000,
+      "max": 100
+    }
+  },
+  "logging": {
+    "level": "info",
+    "directory": "logs",
+    "maxFiles": 30,
+    "maxSize": "20m",
+    "format": "combined"
+  },
+  "performance": {
+    "cacheEnabled": true,
+    "cacheTTL": 3600,
+    "compression": true,
+    "clustering": false,
+    "workers": 4
+  }
+}

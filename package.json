@@ -1,0 +1,93 @@
+{
+  "name": "trinity-studio-architecture",
+  "version": "1.0.0",
+  "description": "A Complete World of Warcraft Emulator System Supporting All Expansions",
+  "main": "src/core/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/core/index.js",
+    "start:wotlk": "node src/core/index.js --expansion=wotlk",
+    "start:offline": "node src/core/index.js --mode=offline",
+    "dev": "nodemon src/core/index.js",
+    "dev:live": "node src/core/index.js --live-reload",
+    "build": "npm run build:prod",
+    "build:dev": "node scripts/build.js --mode=development",
+    "build:prod": "node scripts/build.js --mode=production",
+    "build:watch": "nodemon --watch src --exec 'npm run build:dev'",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test:core": "node --experimental-vm-modules node_modules/jest/bin/jest.js tests/core",
+    "test:expansions": "node --experimental-vm-modules node_modules/jest/bin/jest.js tests/expansions",
+    "test:integration": "node --experimental-vm-modules node_modules/jest/bin/jest.js tests/integration",
+    "test:coverage": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage",
+    "lint": "eslint src/ tests/ tools/",
+    "lint:fix": "eslint src/ tests/ tools/ --fix",
+    "format": "prettier --write \"src/**/*.js\" \"tests/**/*.js\" \"tools/**/*.js\"",
+    "db:init": "node scripts/database/init.js",
+    "db:import": "node scripts/database/import.js",
+    "db:migrate": "node scripts/database/migrate.js",
+    "extract:all": "node tools/data-extraction/extract-all.js",
+    "extract:zones": "node tools/data-extraction/extract-zones.js",
+    "extract:npcs": "node tools/data-extraction/extract-npcs.js",
+    "extract:quests": "node tools/data-extraction/extract-quests.js",
+    "extract:items": "node tools/data-extraction/extract-items.js",
+    "config:expansions": "node scripts/configure-expansions.js",
+    "setup:offline": "node scripts/setup-offline.js",
+    "sync:to-online": "node src/sync/sync-to-online.js",
+    "sync:to-offline": "node src/sync/sync-to-offline.js",
+    "debugger:start": "node src/ai-debugger/dashboard/server.js",
+    "quest-editor": "node tools/quest-editor/start.js",
+    "npc-editor": "node tools/npc-editor/start.js",
+    "docs:serve": "docsify serve docs",
+    "docs:build": "node scripts/build-docs.js"
+  },
+  "keywords": [
+    "wow",
+    "world-of-warcraft",
+    "emulator",
+    "trinitycore",
+    "server",
+    "mmorpg",
+    "vanilla",
+    "tbc",
+    "wotlk",
+    "retail"
+  ],
+  "author": "Trinity Studio Architecture Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SpidermanTotro/Trinity-Studio-Architecture.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SpidermanTotro/Trinity-Studio-Architecture/issues"
+  },
+  "homepage": "https://github.com/SpidermanTotro/Trinity-Studio-Architecture#readme",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "mysql2": "^3.6.5",
+    "ws": "^8.14.2",
+    "dotenv": "^16.3.1",
+    "winston": "^3.11.0",
+    "joi": "^17.11.0",
+    "lodash": "^4.17.21",
+    "axios": "^1.6.2",
+    "bcrypt": "^5.1.1",
+    "jsonwebtoken": "^9.0.2",
+    "cors": "^2.8.5",
+    "helmet": "^7.1.0",
+    "compression": "^1.7.4",
+    "rate-limiter-flexible": "^4.0.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "eslint": "^8.54.0",
+    "prettier": "^3.1.0",
+    "nodemon": "^3.0.2",
+    "docsify-cli": "^4.4.4",
+    "@types/node": "^20.10.4"
+  }
+}

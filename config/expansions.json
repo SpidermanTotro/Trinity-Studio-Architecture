@@ -1,0 +1,145 @@
+{
+  "vanilla": {
+    "enabled": true,
+    "version": "1.12.1",
+    "name": "Classic/Vanilla",
+    "database": "trinity_world_vanilla",
+    "features": {
+      "maxLevel": 60,
+      "supportedRaces": ["Human", "Orc", "Dwarf", "Night Elf", "Undead", "Tauren", "Gnome", "Troll"],
+      "supportedClasses": ["Warrior", "Paladin", "Hunter", "Rogue", "Priest", "Shaman", "Mage", "Warlock", "Druid"],
+      "continents": ["Eastern Kingdoms", "Kalimdor"],
+      "raids": ["Molten Core", "Blackwing Lair", "Ahn'Qiraj", "Naxxramas"],
+      "dungeons": ["Deadmines", "Wailing Caverns", "Shadowfang Keep", "Blackfathom Deeps", "Razorfen Kraul", "Scarlet Monastery", "Uldaman", "Zul'Farrak", "Maraudon", "Sunken Temple", "Blackrock Depths", "Dire Maul", "Scholomance", "Stratholme", "Blackrock Spire"]
+    }
+  },
+  "tbc": {
+    "enabled": true,
+    "version": "2.4.3",
+    "name": "The Burning Crusade",
+    "database": "trinity_world_tbc",
+    "features": {
+      "maxLevel": 70,
+      "supportedRaces": ["Human", "Orc", "Dwarf", "Night Elf", "Undead", "Tauren", "Gnome", "Troll", "Blood Elf", "Draenei"],
+      "supportedClasses": ["Warrior", "Paladin", "Hunter", "Rogue", "Priest", "Shaman", "Mage", "Warlock", "Druid"],
+      "continents": ["Eastern Kingdoms", "Kalimdor", "Outland"],
+      "raids": ["Karazhan", "Gruul's Lair", "Magtheridon's Lair", "Serpentshrine Cavern", "Tempest Keep", "Black Temple", "Sunwell Plateau"],
+      "dungeons": ["Hellfire Citadel", "Coilfang Reservoir", "Auchindoun", "Tempest Keep Dungeons", "Caverns of Time"],
+      "flying": true
+    }
+  },
+  "wotlk": {
+    "enabled": true,
+    "version": "3.3.5a",
+    "name": "Wrath of the Lich King",
+    "database": "trinity_world_wotlk",
+    "features": {
+      "maxLevel": 80,
+      "supportedRaces": ["Human", "Orc", "Dwarf", "Night Elf", "Undead", "Tauren", "Gnome", "Troll", "Blood Elf", "Draenei"],
+      "supportedClasses": ["Warrior", "Paladin", "Hunter", "Rogue", "Priest", "Shaman", "Mage", "Warlock", "Druid", "Death Knight"],
+      "continents": ["Eastern Kingdoms", "Kalimdor", "Outland", "Northrend"],
+      "raids": ["Naxxramas", "Eye of Eternity", "Obsidian Sanctum", "Ulduar", "Trial of the Crusader", "Icecrown Citadel", "Ruby Sanctum"],
+      "dungeons": ["Utgarde Keep", "The Nexus", "Azjol-Nerub", "Drak'Tharon Keep", "Violet Hold", "Gundrak", "Halls of Stone", "Halls of Lightning", "Culling of Stratholme", "Trial of the Champion", "Forge of Souls", "Pit of Saron", "Halls of Reflection"],
+      "achievements": true,
+      "dualSpec": true
+    }
+  },
+  "cataclysm": {
+    "enabled": false,
+    "version": "4.3.4",
+    "name": "Cataclysm",
+    "database": "trinity_world_cataclysm",
+    "features": {
+      "maxLevel": 85,
+      "supportedRaces": ["Human", "Orc", "Dwarf", "Night Elf", "Undead", "Tauren", "Gnome", "Troll", "Blood Elf", "Draenei", "Worgen", "Goblin"],
+      "supportedClasses": ["Warrior", "Paladin", "Hunter", "Rogue", "Priest", "Shaman", "Mage", "Warlock", "Druid", "Death Knight"],
+      "continents": ["Eastern Kingdoms", "Kalimdor", "Outland", "Northrend", "Deepholm", "Vashj'ir"],
+      "raids": ["Blackwing Descent", "Bastion of Twilight", "Throne of the Four Winds", "Firelands", "Dragon Soul"],
+      "flying": true,
+      "reforging": true,
+      "transmogrification": true
+    }
+  },
+  "mop": {
+    "enabled": false,
+    "version": "5.4.8",
+    "name": "Mists of Pandaria",
+    "database": "trinity_world_mop",
+    "features": {
+      "maxLevel": 90,
+      "supportedRaces": ["Human", "Orc", "Dwarf", "Night Elf", "Undead", "Tauren", "Gnome", "Troll", "Blood Elf", "Draenei", "Worgen", "Goblin", "Pandaren"],
+      "supportedClasses": ["Warrior", "Paladin", "Hunter", "Rogue", "Priest", "Shaman", "Mage", "Warlock", "Druid", "Death Knight", "Monk"],
+      "continents": ["Eastern Kingdoms", "Kalimdor", "Outland", "Northrend", "Pandaria"],
+      "raids": ["Mogu'shan Vaults", "Heart of Fear", "Terrace of Endless Spring", "Throne of Thunder", "Siege of Orgrimmar"],
+      "petBattles": true,
+      "scenarios": true
+    }
+  },
+  "wod": {
+    "enabled": false,
+    "version": "6.2.4",
+    "name": "Warlords of Draenor",
+    "database": "trinity_world_wod",
+    "features": {
+      "maxLevel": 100,
+      "continents": ["Eastern Kingdoms", "Kalimdor", "Outland", "Northrend", "Pandaria", "Draenor"],
+      "raids": ["Highmaul", "Blackrock Foundry", "Hellfire Citadel"],
+      "garrisons": true
+    }
+  },
+  "legion": {
+    "enabled": false,
+    "version": "7.3.5",
+    "name": "Legion",
+    "database": "trinity_world_legion",
+    "features": {
+      "maxLevel": 110,
+      "continents": ["Eastern Kingdoms", "Kalimdor", "Outland", "Northrend", "Pandaria", "Draenor", "Broken Isles"],
+      "raids": ["The Emerald Nightmare", "Trial of Valor", "The Nighthold", "Tomb of Sargeras", "Antorus"],
+      "artifacts": true,
+      "worldQuests": true
+    }
+  },
+  "bfa": {
+    "enabled": false,
+    "version": "8.3.7",
+    "name": "Battle for Azeroth",
+    "database": "trinity_world_bfa",
+    "features": {
+      "maxLevel": 120,
+      "continents": ["Eastern Kingdoms", "Kalimdor", "Outland", "Northrend", "Pandaria", "Draenor", "Broken Isles", "Kul Tiras", "Zandalar"],
+      "raids": ["Uldir", "Battle of Dazar'alor", "Crucible of Storms", "Eternal Palace", "Ny'alotha"],
+      "islandExpeditions": true,
+      "warfronts": true
+    }
+  },
+  "shadowlands": {
+    "enabled": false,
+    "version": "9.2.7",
+    "name": "Shadowlands",
+    "database": "trinity_world_shadowlands",
+    "features": {
+      "maxLevel": 60,
+      "continents": ["Eastern Kingdoms", "Kalimdor", "Outland", "Northrend", "Pandaria", "Draenor", "Broken Isles", "Kul Tiras", "Zandalar", "The Shadowlands"],
+      "raids": ["Castle Nathria", "Sanctum of Domination", "Sepulcher of the First Ones"],
+      "covenants": true,
+      "torghast": true,
+      "levelSquish": true
+    }
+  },
+  "dragonflight": {
+    "enabled": false,
+    "version": "10.2.0",
+    "name": "Dragonflight",
+    "database": "trinity_world_dragonflight",
+    "features": {
+      "maxLevel": 70,
+      "continents": ["Eastern Kingdoms", "Kalimdor", "Outland", "Northrend", "Pandaria", "Draenor", "Broken Isles", "Kul Tiras", "Zandalar", "The Shadowlands", "Dragon Isles"],
+      "supportedRaces": ["Human", "Orc", "Dwarf", "Night Elf", "Undead", "Tauren", "Gnome", "Troll", "Blood Elf", "Draenei", "Worgen", "Goblin", "Pandaren", "Dracthyr"],
+      "supportedClasses": ["Warrior", "Paladin", "Hunter", "Rogue", "Priest", "Shaman", "Mage", "Warlock", "Druid", "Death Knight", "Monk", "Demon Hunter", "Evoker"],
+      "raids": ["Vault of the Incarnates", "Aberrus", "Amirdrassil"],
+      "dragonriding": true,
+      "talentRevamp": true
+    }
+  }
+}
