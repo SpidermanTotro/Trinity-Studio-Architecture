@@ -5,8 +5,7 @@
  * Creates necessary databases and imports base schema
  */
 
-import { DatabaseManager } from '../src/core/database/database-manager.js';
-import { Logger } from '../src/core/utils/logger.js';
+import { Logger } from '../../src/core/utils/logger.js';
 import mysql from 'mysql2/promise';
 
 const logger = new Logger('DB-Init');

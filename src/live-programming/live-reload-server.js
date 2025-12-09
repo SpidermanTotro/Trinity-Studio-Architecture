@@ -61,10 +61,10 @@ export class LiveReloadServer {
     const ext = path.extname(filePath);
     
     if (ext === '.js' || ext === '.mjs') {
-      // For ES modules, we need to append a cache-busting query
-      const modulePath = `${filePath}?update=${Date.now()}`;
-      delete require.cache[require.resolve(filePath)];
+      // For ES modules, we use dynamic import with cache-busting query
+      const modulePath = `file://${path.resolve(filePath)}?update=${Date.now()}`;
       await import(modulePath);
+      this.logger.debug(`Module reloaded: ${filePath}`);
     }
   }
 

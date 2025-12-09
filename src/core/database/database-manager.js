@@ -1,9 +1,11 @@
 import mysql from 'mysql2/promise';
+import { Logger } from '../utils/logger.js';
 
 export class DatabaseManager {
   constructor(config) {
     this.config = config;
     this.pools = {};
+    this.logger = new Logger('DatabaseManager');
   }
 
   async connect() {
@@ -49,12 +51,12 @@ export class DatabaseManager {
 
       return true;
     } catch (error) {
-      console.error('Database connection failed:', error.message);
+      this.logger.error('Database connection failed:', error.message);
       // Don't throw in development mode - allow server to start without DB
       if (process.env.NODE_ENV === 'production') {
         throw error;
       }
-      console.warn('⚠️  Running without database connection (development mode)');
+      this.logger.warn('⚠️  Running without database connection (development mode)');
       return false;
     }
   }

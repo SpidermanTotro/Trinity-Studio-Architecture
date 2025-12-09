@@ -44,7 +44,8 @@ export class AIDebuggerServer {
 
   setupRoutes() {
     this.app.use(express.json());
-    this.app.use(express.static('src/ai-debugger/dashboard/public'));
+    // Serve static files if public directory exists
+    // this.app.use(express.static('src/ai-debugger/dashboard/public'));
 
     // Dashboard home
     this.app.get('/debugger', (req, res) => {

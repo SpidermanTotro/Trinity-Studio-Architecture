@@ -49,7 +49,7 @@ class TrinityStudioServer {
       this.logger.info('📦 Modules loaded');
 
       // Setup Express middleware
-      this.setupMiddleware();
+      await this.setupMiddleware();
 
       // Setup routes
       this.setupRoutes();
@@ -82,14 +82,14 @@ class TrinityStudioServer {
     }
   }
 
-  setupMiddleware() {
-    const express = await import('express');
+  async setupMiddleware() {
+    const expressModule = await import('express');
     const cors = await import('cors');
     const helmet = await import('helmet');
     const compression = await import('compression');
 
-    this.app.use(express.json());
-    this.app.use(express.urlencoded({ extended: true }));
+    this.app.use(expressModule.default.json());
+    this.app.use(expressModule.default.urlencoded({ extended: true }));
     this.app.use(cors.default());
     this.app.use(helmet.default());
     this.app.use(compression.default());
